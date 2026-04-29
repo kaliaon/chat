@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "highlight.js/styles/github.css";
 
 :root {
   --background: #ffffff;
@@ -16,6 +17,47 @@
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .hljs {
+    background: #0d1117;
+    color: #c9d1d9;
+  }
+  .hljs-keyword,
+  .hljs-selector-tag,
+  .hljs-literal,
+  .hljs-section,
+  .hljs-link {
+    color: #ff7b72;
+  }
+  .hljs-function .hljs-title,
+  .hljs-title.function_,
+  .hljs-title {
+    color: #d2a8ff;
+  }
+  .hljs-string,
+  .hljs-attr {
+    color: #a5d6ff;
+  }
+  .hljs-number,
+  .hljs-symbol,
+  .hljs-bullet,
+  .hljs-built_in,
+  .hljs-builtin-name,
+  .hljs-meta {
+    color: #79c0ff;
+  }
+  .hljs-comment,
+  .hljs-quote,
+  .hljs-deletion {
+    color: #8b949e;
+  }
+  .hljs-name,
+  .hljs-tag,
+  .hljs-attribute {
+    color: #7ee787;
   }
 }
 

@@ -3,6 +3,7 @@
 import { useChat } from "@ai-sdk/react";
 import type { UIMessage } from "ai";
 import { useEffect, useRef, useState } from "react";
+import { Markdown } from "./markdown";
 
 const STORAGE_KEY = "teacher-chat-history";
 
@@ -172,15 +173,21 @@ export default function Home() {
                     {isUser ? "Сіз" : "Көмекші"}
                   </span>
                   <div
-                    className={`max-w-[85%] whitespace-pre-wrap rounded-2xl px-4 py-3 text-sm leading-6 shadow-sm sm:text-base sm:leading-7 ${
+                    className={`max-w-[85%] rounded-2xl px-4 py-3 text-sm leading-6 shadow-sm sm:text-base sm:leading-7 ${
                       isUser
-                        ? "bg-blue-600 text-white"
+                        ? "whitespace-pre-wrap bg-blue-600 text-white"
                         : "bg-white text-zinc-800 dark:bg-zinc-900 dark:text-zinc-100"
                     }`}
                   >
-                    {messageText(message) || (
-                      <span className="italic opacity-70">Жауап дайындалуда…</span>
-                    )}
+                    {(() => {
+                      const text = messageText(message);
+                      if (!text) {
+                        return (
+                          <span className="italic opacity-70">Жауап дайындалуда…</span>
+                        );
+                      }
+                      return isUser ? text : <Markdown>{text}</Markdown>;
+                    })()}
                   </div>
                 </div>
               );
