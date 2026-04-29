@@ -7,7 +7,7 @@ Conversation history lives in the browser's `localStorage` — no database, no a
 ## Stack
 
 - **Next.js 15** (App Router) — single project for Node API + React UI
-- **`@ai-sdk/google`** + Gemini 2.5 Flash — direct call from the server route
+- **`@ai-sdk/google`** + Gemini 2.5 Flash-Lite — direct call from the server route
 - **`@ai-sdk/react`** `useChat` — streaming UI
 - **localStorage** — per-browser chat history
 - **Tailwind CSS**
@@ -57,4 +57,4 @@ lib/
 - No auth, no users
 - Single thread per browser — no conversation list
 - No file uploads / images / artifacts
-- No model picker — Gemini 2.5 Flash is hard-coded
+- No model picker — Gemini 2.5 Flash-Lite is hard-coded
