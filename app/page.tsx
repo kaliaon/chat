@@ -99,9 +99,27 @@ export default function Home() {
             type="button"
             onClick={handleClear}
             disabled={messages.length === 0 && !isBusy}
-            className="shrink-0 rounded-md border border-zinc-300 bg-white px-3 py-1.5 text-xs font-medium text-zinc-700 transition hover:bg-zinc-100 disabled:cursor-not-allowed disabled:opacity-50 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-200 dark:hover:bg-zinc-800 sm:text-sm"
+            aria-label="Чатты тазалау"
+            title="Чатты тазалау"
+            className="shrink-0 rounded-md border border-zinc-300 bg-white p-2 text-zinc-600 transition hover:bg-zinc-100 hover:text-zinc-900 disabled:cursor-not-allowed disabled:opacity-50 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-300 dark:hover:bg-zinc-800 dark:hover:text-zinc-50"
           >
-            Чатты тазалау
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.8"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="h-5 w-5"
+              aria-hidden="true"
+            >
+              <path d="M3 6h18" />
+              <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+              <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6" />
+              <path d="M10 11v6" />
+              <path d="M14 11v6" />
+            </svg>
           </button>
         </div>
       </header>
@@ -223,7 +241,7 @@ export default function Home() {
           )}
         </form>
         <p className="mx-auto max-w-3xl px-4 pb-3 text-center text-[11px] text-zinc-400 sm:px-6">
-          Жауаптарды Gemini жасанды интеллекті жасайды. Маңызды шешімдерді қабылдамас бұрын ақпаратты тексеріңіз.
+          Жауаптарды жасанды интеллект жасайды. Маңызды шешімдерді қабылдамас бұрын ақпаратты тексеріңіз.
         </p>
       </footer>
     </div>
