@@ -1,36 +1,60 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Teacher Chatbot (Kazakh UI)
 
-## Getting Started
+Single-page chatbot for Kazakh-speaking high-school computer-science teachers (grades 9–11). The UI and system prompt are in Kazakh; everything else (code, docs) is English.
 
-First, run the development server:
+Conversation history lives in the browser's `localStorage` — no database, no auth.
+
+## Stack
+
+- **Next.js 15** (App Router) — single project for Node API + React UI
+- **`@ai-sdk/google`** + Gemini 2.5 Flash — direct call from the server route
+- **`@ai-sdk/react`** `useChat` — streaming UI
+- **localStorage** — per-browser chat history
+- **Tailwind CSS**
+- **Render** — Web Service deploy target
+
+## Local setup
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
+pnpm install
+cp .env.example .env.local
+# put your key in .env.local: GOOGLE_GENERATIVE_AI_API_KEY=...
 pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open http://localhost:3000.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Get a free key at https://aistudio.google.com/app/apikey.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Deploy on Render
 
-## Learn More
+1. Push the repo to GitHub.
+2. Render → New → **Web Service** → connect the repo.
+3. Settings:
+   - **Runtime:** Node
+   - **Build Command:** `pnpm install && pnpm build`
+   - **Start Command:** `pnpm start`
+4. Add env var: `GOOGLE_GENERATIVE_AI_API_KEY`.
+5. Free instance type is fine (sleeps after ~15 min idle).
 
-To learn more about Next.js, take a look at the following resources:
+Auto-deploys on push.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Project layout
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```
+app/
+  page.tsx              # Chat UI: useChat + localStorage (Kazakh strings)
+  api/chat/route.ts     # POST: streamText({ model: google(...), system, messages })
+  layout.tsx            # lang="kk", Kazakh metadata
+  globals.css
+lib/
+  system-prompt.ts      # Kazakh teacher system prompt (covers the 5 SCRIPT.md categories)
+```
 
-## Deploy on Vercel
+## Out of scope
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- No database (no Postgres / Redis / Blob)
+- No auth, no users
+- Single thread per browser — no conversation list
+- No file uploads / images / artifacts
+- No model picker — Gemini 2.5 Flash is hard-coded
